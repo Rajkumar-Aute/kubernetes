@@ -1,0 +1,1 @@
+This repository is used to store some of the Kubernetes sample yaml files.
