@@ -40,9 +40,9 @@ spec:
           protocol: TCP
 ---
 apiVersion: v1
-kind: Service-dep
+kind: Service
 metadata:
-  name: httpd-service
+  name: httpd-service-dep
 spec:
   selector:
     app: httpd
