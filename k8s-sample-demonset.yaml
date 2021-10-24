@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: DaemonSet # resource name
+metadata:
+  name: daemonset-sample # name of service
+  labels:
+    app: daemonset-sample
+spec:
+  minReadySeconds: 10
+  selector:
+    matchlabels:
+      app: daemonset-sample
+  template:
+    metadata:
+      labels:
+        app: daemon
+        version: "1.0"
+    spec:
+      containers:
+        - name: alpine
+          image: alpine
+          args:
+            -  /bin/sh
+            - -c
+            - sleep 1d
+
+
+# kubectl get daemonsets
+
+# kubectl get pods -o wide
