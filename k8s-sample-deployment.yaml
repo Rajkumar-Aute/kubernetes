@@ -40,7 +40,7 @@ spec:
           protocol: TCP
 ---
 apiVersion: v1
-kind: Service
+kind: Service-dep
 metadata:
   name: httpd-service
 spec:
