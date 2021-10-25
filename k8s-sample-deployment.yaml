@@ -38,6 +38,51 @@ spec:
         ports: # ports need to map with container
         - containerPort: 80
           protocol: TCP
+        volumeMounts: # persistent volume mount
+        - mountPath: /data
+          name: pv-sample
+      volumes: # linking persistent volume claim
+      - name: pv-sample
+        persistentVolumeClaim:
+          claimName: pvc-sample
+
+# volume mount non persistent example
+#      volumeMounts: # volume mount to the container / pod
+#      - mountPath: /data
+#        name: data-volume
+#    volumes: # the volume mapped to host machine non persistent data
+#    - name: data-volume
+#      emptyDir: {}
+
+---
+# creating persistent volume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-sample
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /data
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+---
+# persistent Volume claim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-sample
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+
 ---
 apiVersion: v1
 kind: Service

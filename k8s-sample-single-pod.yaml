@@ -16,6 +16,13 @@ spec:
     ports: # container port to access the service
       - containerPort: 80
         protocol: TCP
+    volumeMounts: # volume mount to the container / pod
+      - mountPath: /data
+        name: data-volume
+  volumes: # the volume mapped to host machine non persistent data
+  - name: data-volume
+    emptyDir: {}
+
 ---
 apiVersion: v1
 kind: Service
@@ -29,6 +36,9 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 80
----
+
+
+
+#---
 # to check the created pod use below commends
 # kubectl get pods
