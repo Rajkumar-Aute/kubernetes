@@ -1,0 +1,16 @@
+
+# persistent Volume claim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-sample
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+
+# after creating we can check by
+# kubectl get pvc

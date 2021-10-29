@@ -1,0 +1,45 @@
+# backend database sample mysql
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-db
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+        app: backend-db
+        env: prod
+        version: "1"
+  template:
+    metadata:
+      labels:
+        app: backend-db
+        env: prod
+        version: "1"
+    spec:
+      containers:
+      - name: backend-db
+        image: mysql:5.7
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "dbrootuser"
+        volumeMounts: # persistent volume mount
+        - mountPath: /data
+          name: pv-sample
+      volumes: # linking persistent volume claim
+      - name: pv-sample
+        persistentVolumeClaim:
+          claimName: pvc-sample

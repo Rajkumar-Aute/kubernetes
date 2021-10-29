@@ -1,0 +1,42 @@
+# frontend application sample nginx
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: frontend-app
+      env: prod
+      version: "1"
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+        env: prod
+        version: "1"
+    spec:
+      containers:
+      - name: frontend-container
+        image: nginx
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts: # persistent volume mount
+        - mountPath: /data
+          name: pv-sample
+      volumes: # linking persistent volume claim
+      - name: pv-sample
+        persistentVolumeClaim:
+          claimName: pvc-sample

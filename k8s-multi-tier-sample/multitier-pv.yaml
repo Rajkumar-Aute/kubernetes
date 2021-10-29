@@ -1,0 +1,14 @@
+# creating persistent volume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-sample
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /data
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem

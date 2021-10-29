@@ -1,3 +1,4 @@
+# creating daemon set
 apiVersion: apps/v1
 kind: DaemonSet # resource name
 metadata:

@@ -54,48 +54,7 @@ spec:
 #    - name: data-volume
 #      emptyDir: {}
 
----
-# creating persistent volume
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-sample
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-  - ReadWriteOnce
-  hostPath:
-    path: /data
-  persistentVolumeReclaimPolicy: Retain
-  volumeMode: Filesystem
----
-# persistent Volume claim
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pvc-sample
-spec:
-  resources:
-    requests:
-      storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: httpd-service-dep
-spec:
-  selector:
-    app: httpd
-  type: NodePort
-  ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
 
 
 

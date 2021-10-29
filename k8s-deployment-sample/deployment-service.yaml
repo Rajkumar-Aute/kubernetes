@@ -1,0 +1,16 @@
+# creating service for deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpd-service-dep
+spec:
+  selector:
+    app: httpd
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+
+# after creating we can check by
+# kubectl get svc

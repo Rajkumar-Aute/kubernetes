@@ -1,0 +1,17 @@
+# creating persistent volume for deployment
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-sample
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /data
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+
+# after creating we can check by
+# kubectl get pv
