@@ -2,5 +2,5 @@
 
 ### To download/clone the Kubernetes Sample template below visit github repo
 ```
-github clone https://github.com/RajkumarAute/kubernetes.git
+git clone https://github.com/RajkumarAute/kubernetes.git
 ```
