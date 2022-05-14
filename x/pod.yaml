@@ -1,0 +1,10 @@
+apiVersion: core/v1
+kind: pod
+metadata:
+  name: pod-1
+  label: pod-1
+spec:
+  containers:
+  - name: pod-1
+    image: nginx
+    
